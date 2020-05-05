@@ -11,11 +11,14 @@ import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Prim_GUI {
 
 	private JFrame frame;
-
+	Prim_Min_Span_Tree mst1 = new Prim_Min_Span_Tree();
+	int[][] standard = mst1.getMatrix();
 	/**
 	 * Launch the application.
 	 */
@@ -54,22 +57,44 @@ public class Prim_GUI {
 		frame.getContentPane().add(textArea);
 		
 		JButton btnFixedMatrix = new JButton("Fixed Matrix");
+		btnFixedMatrix.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Prim_Min_Span_Tree mst3 = new Prim_Min_Span_Tree(standard); //For some reason it wouldn't be able to use the normal one
+		        															//So to the fixed matrix from above and made it into a new variable to be reused.
+		        String str3 = mst3.primMST(mst3.getMatrix());
+				textArea.setText(str3);
+			}
+		});
 		btnFixedMatrix.setBounds(277, 392, 103, 37);
 		frame.getContentPane().add(btnFixedMatrix);
 		
-		JButton btnRandomMatrix = new JButton("Random Matrix");
-		btnRandomMatrix.setBounds(405, 392, 127, 37);
-		frame.getContentPane().add(btnRandomMatrix);
 		
-		JTextArea txtrFixedMatrix = new JTextArea();
+		JTextArea txtrFixedMatrix = new JTextArea(mst1.toString(mst1.getMatrix()));
 		txtrFixedMatrix.setEditable(false);
 		txtrFixedMatrix.setBounds(26, 50, 208, 271);
 		frame.getContentPane().add(txtrFixedMatrix);
+		
 		
 		JTextArea txtrRandomMatrix = new JTextArea();
 		txtrRandomMatrix.setEditable(false);
 		txtrRandomMatrix.setBounds(536, 50, 208, 271);
 		frame.getContentPane().add(txtrRandomMatrix);
+		
+		
+		JButton btnRandomMatrix = new JButton("Random Matrix");
+		btnRandomMatrix.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int [][] m = Prim_Min_Span_Tree.randMatrix();
+		        Prim_Min_Span_Tree mst2 = new Prim_Min_Span_Tree(m);
+		        txtrRandomMatrix.setText(mst2.toString(mst2.getMatrix()));
+		        
+		        String str2 = mst2.primMST(mst2.getMatrix());
+				textArea.setText(str2);
+			}
+		});
+		btnRandomMatrix.setBounds(405, 392, 127, 37);
+		frame.getContentPane().add(btnRandomMatrix);
+		
 		
 		JLabel lblFixedMatrix = new JLabel("Fixed Matrix");
 		lblFixedMatrix.setFont(new Font("Tahoma", Font.PLAIN, 11));

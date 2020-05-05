@@ -15,7 +15,7 @@ public class Prim_Min_Span_Tree {
             { 0, 5, 7, 9, 0 }
         };
         matrix = m;
-        primMST(matrix);
+        //primMST(matrix);
 	}
 	
 	public void setMatrix(int m[][]) {
@@ -29,7 +29,7 @@ public class Prim_Min_Span_Tree {
 		matrix = m;
 		int v = matrix.length;
 		this.v = v;
-		primMST(matrix);
+		//primMST(matrix);
 	}
 	
 	public int extractMin(int[] key, Boolean[] inMST) {
@@ -45,7 +45,7 @@ public class Prim_Min_Span_Tree {
 		return min_index;
 	}
 	
-	public void primMST(int [][] matrix) {
+	public String primMST(int [][] matrix) {
 		int p[] = new int[v];
 		int key[] = new int[v];
 		// p and key make a square matrix of size v by v
@@ -72,7 +72,7 @@ public class Prim_Min_Span_Tree {
 			}
 		}
 		
-		printMST(p,matrix);
+		return printMST(p,matrix);
 	}
 	
 	public String printMST(int p[], int matrix[][]) {
@@ -104,7 +104,7 @@ public class Prim_Min_Span_Tree {
 	public String toString(int [][] m) {
 		int[][] rm = m;
 		int l = rm.length;
-		String str = "\n";
+		String str = "";
 		for(int i=0; i<l;i++) {
 			for(int j=0; j<l; j++) {
 				str = str + rm[i][j] + " ";
@@ -128,7 +128,7 @@ public class Prim_Min_Span_Tree {
         Prim_Min_Span_Tree t = new Prim_Min_Span_Tree();
         int[][] ma = t.getMatrix();
         System.out.println(t.toString(ma));
-        
+        System.out.println();
         
         int [][] m = randMatrix();
         Prim_Min_Span_Tree s = new Prim_Min_Span_Tree(m);
